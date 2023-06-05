@@ -2,10 +2,12 @@ import {useCallback, useEffect, useState} from "react";
 import {LatLngExpression} from "leaflet";
 import {SelectChangeEvent} from "@mui/material";
 import {FeatureCollection} from "geojson";
+import {baseMaps} from "./consts";
 
 export const useCustomHook = ()=>{
+    const [zoom] = useState(9);
     const [center] = useState<LatLngExpression>([48.7194, 44.5018]);
-    const [baseMap, setBaseMap] = useState('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+    const [baseMap, setBaseMap] = useState(baseMaps[0].value);
     const [isSettings, setIsSettings] = useState(false);
     const [isShowGeoJSON, setIsShowGeoJSON] = useState(false);
     const [geoJSON, setGeoJSON] = useState<FeatureCollection | null>(null);
@@ -44,6 +46,7 @@ export const useCustomHook = ()=>{
         handleSelectsChange,
         isShowGeoJSON,
         geoJSON,
-        setIsShowGeoJSON
+        setIsShowGeoJSON,
+        zoom,
     }
 }
